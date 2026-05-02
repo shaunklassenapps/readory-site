@@ -1,35 +1,641 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Readory</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readory — Your personal reading journey tracker</title>
+  <meta name="description" content="Readory helps you keep track of every book you read, every session you sit down with it, and every thought you had along the way. All private. All yours.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── Hero ─── */
+    .hero {
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto 1.25rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── App icon placeholder ─── */
+    .icon-mockup {
+      width: 120px;
+      height: 120px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, var(--accent-light) 0%, #d0e8da 100%);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2.25rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .icon-mockup svg {
+      width: 52px;
+      height: 52px;
+      opacity: 0.65;
+    }
+
+    /* ─── Phone mockup ─── */
+    .phone-section {
+      padding: 4rem 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-frame {
+      width: 280px;
+      height: 560px;
+      background: var(--white);
+      border-radius: 44px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-md), 0 24px 60px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: var(--text);
+      border-radius: 0 0 18px 18px;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      padding: 42px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .phone-header {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--text);
+      padding: 6px 0 8px;
+    }
+
+    .phone-book-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .phone-book-spine {
+      width: 36px;
+      height: 54px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .phone-book-info { flex: 1; min-width: 0; }
+
+    .phone-book-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .phone-book-author {
+      font-size: 0.65rem;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+
+    .phone-progress-bar {
+      height: 3px;
+      background: var(--bg-alt);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .phone-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+    }
+
+    .phone-progress-label {
+      font-size: 0.6rem;
+      color: var(--text-tertiary);
+    }
+
+    .phone-timer-row {
+      background: var(--accent);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .phone-timer-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .phone-timer-value {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Features ─── */
+    .features {
+      padding: 5rem 2rem;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 3.5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+    }
+
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ─── Privacy ─── */
+    .privacy-band {
+      padding: 5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 680px) {
+      .privacy-band { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .privacy-lock {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1;
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-tertiary);
+    }
+
+    .privacy-lock svg { width: 56px; height: 56px; opacity: 0.4; }
+
+    .privacy-lock-label {
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      text-align: center;
+      max-width: 160px;
+      line-height: 1.5;
+    }
+
+    .privacy-text .section-title { margin-bottom: 1rem; }
+
+    .privacy-text p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .privacy-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      margin-top: 0.5rem;
+    }
+
+    /* ─── CTA Banner ─── */
+    .cta-band {
+      margin: 0 2rem 2rem;
+      background: var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 4rem 3rem;
+      text-align: center;
+    }
+
+    .cta-band .section-label { color: rgba(255,255,255,0.6); }
+
+    .cta-band .section-title {
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-band p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--accent);
+    }
+
+    .btn-white:hover { background: var(--accent-light); color: var(--accent); }
+
+    /* ─── Accessibility ─── */
+    .a11y-band {
+      padding: 5rem 2rem;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .a11y-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .a11y-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      padding: 0.35rem 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .features, .a11y-band { padding: 3.5rem 1.5rem; }
+      .cta-band { margin: 0 1rem 1rem; padding: 3rem 1.5rem; }
+    }
+  </style>
 </head>
+<body>
 
-<body style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 40px auto; line-height: 1.6; padding: 0 16px; text-align: center;">
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Readory</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="#download" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <h1>Readory</h1>
-  <p>Track your reading. Build the habit. Remember what you read.</p>
+<main>
 
-  <hr>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="icon-mockup fade-up fade-up-1">
+      <!-- Book + bookmark icon placeholder -->
+      <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="6" width="28" height="36" rx="3" fill="none" stroke="#2e6b4f" stroke-width="2.5"/>
+        <line x1="14" y1="16" x2="30" y2="16" stroke="#2e6b4f" stroke-width="2" stroke-linecap="round"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="#2e6b4f" stroke-width="2" stroke-linecap="round"/>
+        <line x1="14" y1="28" x2="24" y2="28" stroke="#2e6b4f" stroke-width="2" stroke-linecap="round"/>
+        <path d="M34 8 L34 26 L40 22 L46 26 L46 8 Z" fill="#2e6b4f" opacity="0.8"/>
+      </svg>
+    </div>
 
-  <h2>Simple. Focused. Built for consistency.</h2>
+    <div class="hero-eyebrow fade-up fade-up-1">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="6"/></svg>
+      Available on iPhone
+    </div>
 
-  <p>
-    Readory helps you turn reading into a consistent habit by tracking sessions,
-    capturing thoughts, and building a complete reading history — all without
-    accounts or distractions.
-  </p>
+    <h1 class="hero-title fade-up fade-up-2">
+      Your personal<br><em>reading journey,</em><br>beautifully tracked.
+    </h1>
 
-  <hr>
+    <p class="hero-sub fade-up fade-up-3">
+      Readory combines "reading" with "memory" — a private space to log every book, every session, and every thought you had along the way.
+    </p>
 
-  <p>
-    <a href="support.html">Support</a> ·
-    <a href="privacy.html">Privacy</a>
-  </p>
+    <div class="hero-actions fade-up fade-up-4">
+      <a href="#download" class="btn btn-primary" id="download">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download on the App Store
+      </a>
+      <a href="support.html" class="btn btn-secondary">Learn more</a>
+    </div>
+  </section>
 
-  <p style="font-size: 0.9em; color: gray;">
-    © 2026 Shaun Klassen
-  </p>
+  <!-- Phone mockup -->
+  <div class="phone-section fade-up fade-up-5">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-header">My Books</div>
+
+        <div class="phone-book-card">
+          <div class="phone-book-spine" style="background: linear-gradient(135deg, #8b5e3c, #c8956a);"></div>
+          <div class="phone-book-info">
+            <div class="phone-book-title">The Name of the Wind</div>
+            <div class="phone-book-author">Patrick Rothfuss</div>
+            <div class="phone-progress-bar"><div class="phone-progress-fill" style="width:68%;"></div></div>
+            <div class="phone-progress-label">Page 530 of 780 · 12 sessions</div>
+          </div>
+        </div>
+
+        <div class="phone-book-card">
+          <div class="phone-book-spine" style="background: linear-gradient(135deg, #2e5f8a, #5b9fd4);"></div>
+          <div class="phone-book-info">
+            <div class="phone-book-title">Sapiens</div>
+            <div class="phone-book-author">Yuval Noah Harari</div>
+            <div class="phone-progress-bar"><div class="phone-progress-fill" style="width:100%;"></div></div>
+            <div class="phone-progress-label">Finished · 8 sessions</div>
+          </div>
+        </div>
+
+        <div class="phone-book-card">
+          <div class="phone-book-spine" style="background: linear-gradient(135deg, #4a7c5e, #83c9a0);"></div>
+          <div class="phone-book-info">
+            <div class="phone-book-title">Atomic Habits</div>
+            <div class="phone-book-author">James Clear</div>
+            <div class="phone-progress-bar"><div class="phone-progress-fill" style="width:22%;"></div></div>
+            <div class="phone-progress-label">Page 62 of 285 · 3 sessions</div>
+          </div>
+        </div>
+
+        <div class="phone-timer-row">
+          <div>
+            <div class="phone-timer-label">Reading now</div>
+            <div class="phone-timer-value" style="font-size:0.7rem; color:#fff; opacity:.85; margin-top:2px;">The Name of the Wind</div>
+          </div>
+          <div class="phone-timer-value">24:17</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything your reading life needs.</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="16" height="16" rx="2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="11" y2="16"/>
+            </svg>
+          </div>
+          <div class="feature-title">Reading Log</div>
+          <div class="feature-desc">Track every book you've read, are reading, or want to read. Add notes, page numbers, and reflections to each session as you go.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><polyline points="11 7 11 11 14 13"/>
+            </svg>
+          </div>
+          <div class="feature-title">Built-in Reading Timer</div>
+          <div class="feature-desc">Start the timer when you open your book. When you're done, log your ending page and thoughts — Readory handles the rest.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="feature-title">Session History</div>
+          <div class="feature-desc">Every session is saved with its timestamp, duration, page range, and your notes. Scroll back through your journey with any book.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="feature-title">Reading Journey Summary</div>
+          <div class="feature-desc">On supported devices, Apple Intelligence can generate a thoughtful summary of your overall experience with any book — synthesised from all your session notes.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="3" height="8"/><rect x="9.5" y="6" width="3" height="13"/><rect x="16" y="2" width="3" height="17"/>
+            </svg>
+          </div>
+          <div class="feature-title">Reading Stats</div>
+          <div class="feature-desc">See your total sessions, time read, and books completed. A quiet record of your reading habit, growing over time.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="feature-title">Completely Private</div>
+          <div class="feature-desc">No account required, no data collection, and no analytics — not even anonymised. Your reading life is yours alone.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section>
+    <div class="privacy-band">
+      <div class="privacy-lock">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#2e6b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="12" y="24" width="32" height="24" rx="4"/>
+          <path d="M18 24V17a10 10 0 0 1 20 0v7"/>
+          <circle cx="28" cy="36" r="3" fill="#2e6b4f" opacity="0.5"/>
+        </svg>
+        <div class="privacy-lock-label">Your reading data is never collected or shared</div>
+      </div>
+      <div class="privacy-text">
+        <div class="section-label">Privacy</div>
+        <h2 class="section-title">No account. No cloud. No tracking.</h2>
+        <p>Readory was built with privacy as a foundation, not an afterthought. Everything you log — your books, your sessions, your thoughts — is yours. We don't collect it, we don't analyse it, and we don't share it.</p>
+        <p>There are no user accounts, no data collection of any kind, and no analytics — not even anonymised ones.</p>
+        <div class="privacy-pill">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 1L1.5 3v4c0 2.5 2 4.3 4.5 5 2.5-.7 4.5-2.5 4.5-5V3L6 1z"/></svg>
+          Private by design
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accessibility -->
+  <section class="a11y-band">
+    <div class="container">
+      <div class="section-label">Accessibility</div>
+      <h2 class="section-title" style="margin-bottom: 0.5rem;">Built for everyone.</h2>
+      <p style="color: var(--text-secondary); font-weight: 300; max-width: 560px; margin-bottom: 0.5rem;">Readory strives to be usable by as wide an audience as possible, with accessibility built in from the ground up.</p>
+      <div class="a11y-pills">
+        <span class="a11y-pill">VoiceOver support</span>
+        <span class="a11y-pill">Dynamic Type</span>
+        <span class="a11y-pill">Reduce Motion</span>
+        <span class="a11y-pill">High Contrast</span>
+        <span class="a11y-pill">Bold Text</span>
+        <span class="a11y-pill">Keyboard navigation</span>
+        <span class="a11y-pill">Dark Mode</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 4rem 0 0;">
+    <div class="cta-band">
+      <div class="section-label">Get started</div>
+      <h2 class="section-title">Start your reading journey today.</h2>
+      <p>Free to download. No subscription. No catch.</p>
+      <a href="#download" class="btn btn-white">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download on the App Store
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-logo">Readory</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">© 2025 Readory. All rights reserved. Apple, iPhone, and Apple Intelligence are trademarks of Apple Inc.</div>
+</footer>
 
 </body>
 </html>
