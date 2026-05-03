@@ -1,446 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy – Readory</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #ffffff;
-      --bg-secondary: #f7f6f3;
-      --text-primary: #1a1a18;
-      --text-secondary: #4a4a46;
-      --text-tertiary: #8a8a84;
-      --border: rgba(0,0,0,0.10);
-      --border-strong: rgba(0,0,0,0.18);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1c1c1a;
-        --bg-secondary: #252523;
-        --text-primary: #f0ede6;
-        --text-secondary: #a8a49c;
-        --text-tertiary: #6a6660;
-        --border: rgba(255,255,255,0.09);
-        --border-strong: rgba(255,255,255,0.16);
-      }
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .pp-wrap {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 3rem 2rem 4rem;
-    }
-
-    /* Hero */
-    .pp-hero {
-      margin-bottom: 3rem;
-      padding-bottom: 2.25rem;
-      border-bottom: 0.5px solid var(--border);
-    }
-    .pp-app-name {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 0.5rem;
-    }
-    .pp-title {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 32px;
-      font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 0.625rem;
-    }
-    .pp-date {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      letter-spacing: 0.02em;
-    }
-    .pp-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #EAF3DE;
-      color: #27500A;
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 20px;
-      margin-top: 1rem;
-    }
-    .pp-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #639922;
-      flex-shrink: 0;
-    }
-    @media (prefers-color-scheme: dark) {
-      .pp-badge { background: #173404; color: #C0DD97; }
-      .pp-badge-dot { background: #639922; }
-    }
-
-    /* Sections */
-    .pp-section { margin-bottom: 2rem; }
-
-    .pp-section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 0.875rem;
-    }
-    .pp-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .pp-icon svg { width: 14px; height: 14px; }
-
-    .icon-teal  { background: #E1F5EE; color: #0F6E56; }
-    .icon-blue  { background: #E6F1FB; color: #185FA5; }
-    .icon-amber { background: #FAEEDA; color: #854F0B; }
-    .icon-gray  { background: #F1EFE8; color: #5F5E5A; }
-    .icon-green { background: #EAF3DE; color: #3B6D11; }
-    .icon-purple{ background: #EEEDFE; color: #534AB7; }
-    .icon-coral { background: #FAECE7; color: #993C1D; }
-    .icon-pink  { background: #FBEAF0; color: #993556; }
-
-    @media (prefers-color-scheme: dark) {
-      .icon-teal  { background: #04342C; color: #5DCAA5; }
-      .icon-blue  { background: #042C53; color: #85B7EB; }
-      .icon-amber { background: #412402; color: #EF9F27; }
-      .icon-gray  { background: #2C2C2A; color: #B4B2A9; }
-      .icon-green { background: #173404; color: #97C459; }
-      .icon-purple{ background: #26215C; color: #AFA9EC; }
-      .icon-coral { background: #4A1B0C; color: #F0997B; }
-      .icon-pink  { background: #4B1528; color: #ED93B1; }
-    }
-
-    .pp-section-title {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .pp-body {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin-bottom: 0.75rem;
-    }
-    .pp-body:last-child { margin-bottom: 0; }
-
-    .pp-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin: 0.5rem 0 0.75rem;
-    }
-    .pp-list li {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      padding-left: 1.25rem;
-      position: relative;
-    }
-    .pp-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 9px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--border-strong);
-    }
-
-    .pp-card {
-      background: var(--bg-secondary);
-      border-radius: 10px;
-      padding: 1rem 1.125rem;
-      margin: 0.75rem 0;
-    }
-
-    .pp-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0.5rem 0;
-    }
-    .pp-pill {
-      font-size: 13px;
-      font-weight: 500;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: var(--bg);
-      border: 0.5px solid var(--border-strong);
-      color: var(--text-primary);
-    }
-
-    .pp-divider {
-      height: 0.5px;
-      background: var(--border);
-      margin: 0.25rem 0 2rem;
-    }
-
-    /* Contact */
-    .pp-contact {
-      background: var(--bg);
-      border: 0.5px solid var(--border-strong);
-      border-radius: 10px;
-      padding: 1rem 1.125rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.75rem;
-    }
-    .pp-contact-label {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      margin-bottom: 2px;
-    }
-    .pp-contact-email {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-    .pp-contact-email:hover { text-decoration: underline; }
-    .pp-contact-arrow { color: var(--text-tertiary); flex-shrink: 0; }
-
-    /* Back link */
-    .pp-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: var(--text-tertiary);
-      text-decoration: none;
-      margin-top: 2.5rem;
-    }
-    .pp-back:hover { color: var(--text-primary); }
-
-    @media (max-width: 480px) {
-      .pp-wrap { padding: 2rem 1.25rem 3rem; }
-      .pp-title { font-size: 26px; }
-    }
-  </style>
+  <title>Privacy Policy for Readory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-  <div class="pp-wrap">
+<body style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 40px auto; line-height: 1.6; padding: 0 16px;">
 
-    <div class="pp-hero">
-      <p class="pp-app-name">Readory</p>
-      <h1 class="pp-title">Privacy Policy</h1>
-      <p class="pp-date">Effective May 2, 2026</p>
-      <div class="pp-badge"><span class="pp-badge-dot"></span>No personal data collected</div>
-    </div>
+  <h1>Privacy Policy for Readory</h1>
+  <p><strong>Effective Date:</strong> May 2, 2026</p>
 
-    <!-- Overview -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-teal">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Overview</h2>
-      </div>
-      <p class="pp-body">Readory is designed to help you track your reading and reflect on your experience. Your privacy is a core principle of the app. Readory does not collect, store, or share your personal data.</p>
-    </div>
+  <h2>Overview</h2>
+  <p>Readory is designed to help you track your reading and reflect on your experience. Your privacy is a core principle of the app. Readory does not collect, store, or share your personal data.</p>
 
-    <div class="pp-divider"></div>
+  <h2>Information Stored on Your Device</h2>
+  <p>Readory stores the following information locally on your device:</p>
+  <ul>
+    <li>Book information, such as title, author, ISBN, and cover image</li>
+    <li>Reading activity, including session dates, durations, and notes</li>
+    <li>Personal ratings and reflections</li>
+  </ul>
+  <p>This information is stored only on your device and is not transmitted to any external servers controlled by the developer.</p>
 
-    <!-- Information stored -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-blue">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M5 5h6M5 8h6M5 11h4"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Information stored on your device</h2>
-      </div>
-      <p class="pp-body">Readory stores the following information locally on your device:</p>
-      <ul class="pp-list">
-        <li>Book information, such as title, author, ISBN, and cover image</li>
-        <li>Reading activity, including session dates, durations, and notes</li>
-        <li>Personal ratings and reflections</li>
-      </ul>
-      <div class="pp-card">
-        <p class="pp-body" style="margin:0;">This information is stored only on your device and is not transmitted to any external servers.</p>
-      </div>
-    </div>
+  <h2>External Data Requests</h2>
+  <p>Readory uses third-party book data services to retrieve book details and cover images:</p>
+  <ul>
+    <li>Open Library</li>
+    <li>Google Books</li>
+  </ul>
+  <p>When you add a book using an ISBN, that ISBN is sent to these services to request matching book data. No personal information is included in these requests.</p>
 
-    <div class="pp-divider"></div>
+  <h2>Analytics</h2>
+  <p>Readory does not include third-party analytics or tracking frameworks.</p>
+  <p>Basic, aggregated app usage data may be provided by Apple through its App Analytics platform. This information is anonymized and does not identify individual users.</p>
 
-    <!-- External data -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-amber">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="8" cy="8" r="6"/><path d="M8 5v1.5M8 9.5V11"/><path d="M5.5 6.5l1 1M9.5 9.5l1 1M5.5 9.5l1-1M9.5 6.5l1-1"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">External data requests</h2>
-      </div>
-      <p class="pp-body">When you add a book using an ISBN, that ISBN is sent to these third-party services to request matching book data. No personal information is included in these requests.</p>
-      <div class="pp-pill-row">
-        <span class="pp-pill">Open Library</span>
-        <span class="pp-pill">Google Books</span>
-      </div>
-    </div>
+  <h2>In-App Purchases</h2>
+  <p>Readory offers an optional in-app purchase to unlock unlimited reading sessions. All payments are processed securely through Apple's in-app purchase system. Readory does not collect or store any payment information.</p>
 
-    <div class="pp-divider"></div>
+  <h2>On-Device Processing</h2>
+  <p>Features such as "Summary of Notes" are performed entirely on-device using Apple Intelligence. Your notes and reading data are not sent to external servers for processing.</p>
 
-    <!-- Analytics -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-gray">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M2 12l3-3 2 2 3-4 4 5"/><rect x="1" y="2" width="14" height="12" rx="1.5"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Analytics</h2>
-      </div>
-      <p class="pp-body">Readory does not include third-party analytics or tracking frameworks.</p>
-      <p class="pp-body">Basic, aggregated app usage data may be provided by Apple through its App Analytics platform. This information is anonymized and does not identify individual users.</p>
-    </div>
+  <h2>Data Control</h2>
+  <p>You have full control over your data:</p>
+  <ul>
+    <li>You can delete individual books and associated reading sessions at any time within the app</li>
+    <li>Removing the app from your device will delete all stored data</li>
+  </ul>
 
-    <div class="pp-divider"></div>
+  <h2>Children's Privacy</h2>
+  <p>Readory does not knowingly collect personal information from anyone, including children under the age of 13.</p>
 
-    <!-- In-app purchases -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-green">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="2" y="4" width="12" height="9" rx="1.5"/><path d="M5 4V3a3 3 0 016 0v1"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">In-app purchases</h2>
-      </div>
-      <p class="pp-body">Readory offers an optional in-app purchase to unlock unlimited reading sessions. All payments are processed securely through Apple's in-app purchase system. Readory does not collect or store any payment information.</p>
-    </div>
+  <h2>Changes to This Policy</h2>
+  <p>This Privacy Policy may be updated from time to time. Any changes will be reflected on this page with an updated effective date.</p>
 
-    <div class="pp-divider"></div>
+  <h2>Contact</h2>
+  <p>If you have any questions about this Privacy Policy, you can contact:</p>
+  <p><strong><a href="mailto:shaunklassen.apps@gmail.com">shaunklassen.apps@gmail.com</a></strong></p>
 
-    <!-- On-device processing -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-purple">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M8 2a3 3 0 013 3v1h1a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h1V5a3 3 0 013-3z"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">On-device processing</h2>
-      </div>
-      <p class="pp-body">Features such as "Summary of Notes" are performed entirely on-device using Apple Intelligence. Your notes and reading data are not sent to external servers for processing.</p>
-    </div>
+  <hr>
+  <p><a href="index.html">Back to main page</a></p>
 
-    <div class="pp-divider"></div>
-
-    <!-- Data control -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-coral">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M8 2a6 6 0 100 12A6 6 0 008 2z"/><path d="M8 6v4M6 8h4"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Data control</h2>
-      </div>
-      <p class="pp-body">You have full control over your data:</p>
-      <ul class="pp-list">
-        <li>You can delete individual books and associated reading sessions at any time within the app</li>
-        <li>Removing the app from your device will delete all stored data</li>
-      </ul>
-    </div>
-
-    <div class="pp-divider"></div>
-
-    <!-- Children's privacy -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-pink">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M8 14s-5-3.5-5-7a5 5 0 0110 0c0 3.5-5 7-5 7z"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Children's privacy</h2>
-      </div>
-      <p class="pp-body">Readory does not knowingly collect personal information from anyone, including children under the age of 13.</p>
-    </div>
-
-    <div class="pp-divider"></div>
-
-    <!-- Changes -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-gray">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M13 8A5 5 0 113 8"/><path d="M13 4v4h-4"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Changes to this policy</h2>
-      </div>
-      <p class="pp-body">This Privacy Policy may be updated from time to time. Any changes will be reflected on this page with an updated effective date.</p>
-    </div>
-
-    <div class="pp-divider"></div>
-
-    <!-- Contact -->
-    <div class="pp-section">
-      <div class="pp-section-header">
-        <div class="pp-icon icon-blue">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z"/><path d="M2 4l6 5 6-5"/>
-          </svg>
-        </div>
-        <h2 class="pp-section-title">Contact</h2>
-      </div>
-      <p class="pp-body">If you have any questions about this Privacy Policy:</p>
-      <div class="pp-contact">
-        <div>
-          <p class="pp-contact-label">Email</p>
-          <a href="mailto:shaunklassen.apps@gmail.com" class="pp-contact-email">shaunklassen.apps@gmail.com</a>
-        </div>
-        <svg class="pp-contact-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M3 8h10M9 4l4 4-4 4"/>
-        </svg>
-      </div>
-    </div>
-
-    <a href="index.html" class="pp-back">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M10 4L6 8l4 4"/>
-      </svg>
-      Back to main page
-    </a>
-
-  </div>
 </body>
 </html>
